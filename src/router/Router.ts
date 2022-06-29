@@ -17,6 +17,7 @@ const routes = [
     path: '/',
     component: HomeVue,
     children: [
+      { path: '/', component: IndexVue },
       { path: '/hot', component: HotVue },
       { path: '/video', component: VideoVue }
     ]

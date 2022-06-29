@@ -6,15 +6,18 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ElButton: typeof import('element-plus/es')['ElButton']
-    Header: typeof import('./src/components/header/Header.vue')['default']
+    ElPopover: typeof import('element-plus/es')['ElPopover']
+    Header: typeof import('./src/components/common/Header.vue')['default']
     Hot: typeof import('./src/components/home/Hot.vue')['default']
     Index: typeof import('./src/components/home/Index.vue')['default']
     Login: typeof import('./src/components/login/Login.vue')['default']
+    NewQuestionModal: typeof import('./src/components/common/NewQuestionModal.vue')['default']
     People: typeof import('./src/components/people/People.vue')['default']
     Question: typeof import('./src/components/question/Question.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Setting: typeof import('./src/components/people/Setting.vue')['default']
+    Sider: typeof import('./src/components/common/Sider.vue')['default']
     Video: typeof import('./src/components/home/Video.vue')['default']
   }
 }

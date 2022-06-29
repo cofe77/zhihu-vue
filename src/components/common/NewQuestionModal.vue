@@ -1,5 +1,5 @@
 <template>
-  <div>Header</div>
+  <div>NewQuestionModal</div>
 </template>
 
 <script lang="ts">

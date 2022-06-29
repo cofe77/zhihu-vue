@@ -5,7 +5,9 @@ import { SET_USER } from './constant'
 const store = createStore({
   state () {
     return {
-      user: {}
+      user: {
+        avatar: ''
+      }
     }
   },
   mutations: {
