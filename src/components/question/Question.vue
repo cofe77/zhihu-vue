@@ -1,6 +1,5 @@
 <template>
-  <div>Type</div>
-  <router-view />
+  <div>question</div>
 </template>
 
 <script lang="ts">

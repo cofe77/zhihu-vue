@@ -1,20 +1,64 @@
+import HotVue from '@/components/home/Hot.vue'
+import IndexVue from '@/components/home/Index.vue'
+import VideoVue from '@/components/home/Video.vue'
+import LoginVue from '@/components/login/Login.vue'
+import PeopleVue from '@/components/people/People.vue'
+import SettingVue from '@/components/people/Setting.vue'
+import QuestionVue from '@/components/question/Question.vue'
+import ExploreVue from '@/pages/Explore.vue'
+import HomeVue from '@/pages/Home.vue'
+import VIPVue from '@/pages/VIP.vue'
+import WaitingVue from '@/pages/Waiting.vue'
 import { createWebHistory, createRouter } from 'vue-router'
 
-import Home from '@/pages/Home.vue'
-import About from '@/pages/About.vue'
-import Type from '@/pages/Type.vue'
-import Index from '@/pages/Index.vue'
-import Hot from '@/pages/Hot.vue'
-
 const routes = [
-  { path: '/', component: Home },
-  { path: '/about', component: About },
+  { path: '/login', component: LoginVue },
   {
-    path: '/type',
-    component: Type,
+    path: '/',
+    component: HomeVue,
     children: [
-      { path: '/type', component: Index },
-      { path: '/type/hot', component: Hot }
+      { path: '/hot', component: HotVue },
+      { path: '/video', component: VideoVue }
+    ]
+  },
+  {
+    path: '/vip',
+    component: VIPVue
+    // children: [
+    //   { path: '/type', component: Index },
+    //   { path: '/type/hot', component: Hot }
+    // ]
+  },
+  {
+    path: '/explore',
+    component: ExploreVue
+    // children: [
+    //   { path: '/type', component: Index },
+    //   { path: '/type/hot', component: Hot }
+    // ]
+  },
+  {
+    path: '/question/waiting',
+    component: WaitingVue
+    // children: [
+    //   { path: '/type', component: Index },
+    //   { path: '/type/hot', component: Hot }
+    // ]
+  },
+  {
+    path: '/question/{id}',
+    component: QuestionVue
+    // children: [
+    //   { path: '/type', component: Index },
+    //   { path: '/type/hot', component: Hot }
+    // ]
+  },
+  {
+    path: '/people',
+    component: PeopleVue,
+    children: [
+      { path: '/people/edit', component: IndexVue },
+      { path: '/people/setting', component: SettingVue }
     ]
   }
 ]

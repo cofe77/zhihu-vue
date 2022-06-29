@@ -4,6 +4,7 @@
     修改用户信息
   </el-button>
   <div>{{ username }}</div>
+  <router-view />
 </template>
 
 <script lang="ts" setup>
