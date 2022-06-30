@@ -8,7 +8,8 @@
         ref="navHeaderBox"
         :class="{
           'navHeaderBox':true,
-          'navIsShow':isNavShow
+          'navIsShow':isNavShow,
+          'navIsHidden':!isNavShow
         }"
       >
         <div class="navNoScroll">
@@ -250,12 +251,9 @@ function headerScroll (): void {
   console.log('windowScrollTop.value:' + windowScrollTop.value)
   console.log('lastWindowScrollTop.value:' + lastWindowScrollTop.value)
   isNavShow.value = !(windowScrollTop.value > lastWindowScrollTop.value)
-  if (isNavShow.value === (windowScrollTop.value > lastWindowScrollTop.value)) {
-    return
-  } else {
+  if (isNavShow.value !== (windowScrollTop.value > lastWindowScrollTop.value)) {
     lastWindowScrollTop.value = windowScrollTop.value
   }
-  console.log(isNavShow.value)
 }
 
 function handlePublishNewQuestion ():void {
@@ -268,12 +266,10 @@ function handlePublishNewQuestion ():void {
 
 <style>
 .navIsShow{
-  top:0;
-  transition: top 0.4s;
+  transform: translateY(0px);
 }
 .navIsHidden{
-  top:-48px;
-  transition: top 0.4s ease-in-out;
+  transform: translateY(-48px);
 }
 .isShow{
   display: block;
@@ -299,6 +295,10 @@ function handlePublishNewQuestion ():void {
   overflow: hidden;
   padding-left: 16px;
   padding-right: 30px;
+  z-index: 99;
+}
+.navHeaderBox{
+  transition: all 0.3s ease-in-out;
 }
 .navNoScroll {
   max-width: 1120px;
