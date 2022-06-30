@@ -251,12 +251,9 @@ function headerScroll (): void {
   console.log('windowScrollTop.value:' + windowScrollTop.value)
   console.log('lastWindowScrollTop.value:' + lastWindowScrollTop.value)
   isNavShow.value = !(windowScrollTop.value > lastWindowScrollTop.value)
-  if (isNavShow.value === (windowScrollTop.value > lastWindowScrollTop.value)) {
-    return
-  } else {
+  if (isNavShow.value !== (windowScrollTop.value > lastWindowScrollTop.value)) {
     lastWindowScrollTop.value = windowScrollTop.value
   }
-  console.log(isNavShow.value)
 }
 
 function handlePublishNewQuestion ():void {
