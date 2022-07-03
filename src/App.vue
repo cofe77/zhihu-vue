@@ -15,13 +15,11 @@ body,div,a,ul,li,input,textarea,section{
 }
 body{
   font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
-  font-size: 15px;
+  overflow: auto !important;
+  background-color: #f6f6f6;
 }
 li{
   list-style: none;
-}
-#root{
-  background-color: #f6f6f6;
 }
 a{
   text-decoration: none;
@@ -36,6 +34,12 @@ a:hover{
 }
 .isFixed{
   position: fixed;
+}
+.isShow{
+  display: block;
+}
+.isHidden{
+  display: none;
 }
 .fl{
   float: left;

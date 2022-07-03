@@ -1,15 +1,15 @@
 import { myAxios as axios } from './myAxios'
 
 interface ApiBase {
-    baseUrl: string,
-    users: string,
-    questions: string,
-    answers: string,
-    getCommentsList: string,
-    updateAnswerMeta: string,
-    newComment:string,
-    userSetting:string,
-    userCenter:string
+  baseUrl: string,
+  users: string,
+  questions: string,
+  answers: string,
+  getCommentsList: string,
+  updateAnswerMeta: string,
+  newComment:string,
+  userSetting:string,
+  userCenter:string
 }
 
 const base:ApiBase = {
@@ -25,30 +25,30 @@ const base:ApiBase = {
 }
 
 interface ApiObject {
-    login:(data:{})=>Promise<any>,
-    register:(data:{})=>Promise<any>,
-    getUserInfoById: (userId: string) => Promise<any>,
-    getUserInfoByName: (username: string) => Promise<any>,
-    getQuestionByCategory:()=>Promise<any>,
-    getAnswersList: (req: {})=>Promise<any>,
-    getCommentsList: (req: {})=>Promise<any>,
-    updateAnswerMeta: (param: {}) => Promise<any>,
-    getQuestionById: (questionId: string) => Promise<any>,
-    newComment: (comment:{})=>Promise<any>,
-    newQuestion: (question:{})=>Promise<any>,
-    newAnswer: (answer:{})=>Promise<any>,
-    toggleFollow: (data:{userId:string, targetUserId:string})=>Promise<any>,
-    updateNick: (data:{id:string, nick:string})=>Promise<any>,
-    updateUserSex: (data: { id: string, sex: string }) => Promise<any>,
-    updateUserSlogan: (data: { id: string, slogan: string }) => Promise<any>,
-    updateUserAddress: (data: { id: string, address: string }) => Promise<any>,
-    updateUserProfession: (data: { id: string, profession: string }) => Promise<any>,
-    updateUserOccupation: (data: { userId: string, organization: string, position: string }) => Promise<any>,
-    deleteUserOccupation: (id: string) => Promise<any>,
-    updateUserUserDesc: (data: { id: string, userDesc: string }) => Promise<any>,
-    addUserEducation: (data: { userId: string, school: string, major: string, dgree: number, hireTime: number, graduTime: number}) => Promise<any>,
-    deleteUserEducation: (id: string) => Promise<any>,
-    getUserDynamicByUsername: (username: string) => Promise<any>,
+  login:(data:{})=>Promise<any>,
+  register:(data:{})=>Promise<any>,
+  getUserInfoById: (userId: string) => Promise<any>,
+  getUserInfoByName: (username: string) => Promise<any>,
+  getQuestionByCategory:()=>Promise<any>,
+  getAnswersList: (req: {})=>Promise<any>,
+  getCommentsList: (req: {})=>Promise<any>,
+  updateAnswerMeta: (param: {}) => Promise<any>,
+  getQuestionById: (questionId: string) => Promise<any>,
+  newComment: (comment:{})=>Promise<any>,
+  newQuestion: (question:{})=>Promise<any>,
+  newAnswer: (answer:{})=>Promise<any>,
+  toggleFollow: (data:{userId:string, targetUserId:string})=>Promise<any>,
+  updateNick: (data:{id:string, nick:string})=>Promise<any>,
+  updateUserSex: (data: { id: string, sex: string }) => Promise<any>,
+  updateUserSlogan: (data: { id: string, slogan: string }) => Promise<any>,
+  updateUserAddress: (data: { id: string, address: string }) => Promise<any>,
+  updateUserProfession: (data: { id: string, profession: string }) => Promise<any>,
+  updateUserOccupation: (data: { userId: string, organization: string, position: string }) => Promise<any>,
+  deleteUserOccupation: (id: string) => Promise<any>,
+  updateUserUserDesc: (data: { id: string, userDesc: string }) => Promise<any>,
+  addUserEducation: (data: { userId: string, school: string, major: string, dgree: number, hireTime: number, graduTime: number}) => Promise<any>,
+  deleteUserEducation: (id: string) => Promise<any>,
+  getUserDynamicByUsername: (username: string) => Promise<any>,
 }
 
 const api: ApiObject = {

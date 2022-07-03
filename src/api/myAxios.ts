@@ -32,6 +32,8 @@ axios.interceptors.request.use(
     })
     config.headers.token = JSON.parse(localStorage.getItem('token') || '{}')
     config.headers['Content-Type'] = 'application/json; charset=UTF-8'
+    console.log(config)
+
     return Promise.resolve(config)
   },
   error => Promise.reject(error)
@@ -54,7 +56,7 @@ axios.interceptors.response.use(
     return Promise.resolve(res)
   },
   async (err: any) => {
-    ElMessage.error(err.response)
+    ElMessage.error(err)
     return Promise.reject(err.response)
   }
 )

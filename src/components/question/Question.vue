@@ -1,11 +1,12 @@
 <template>
-  <div>question</div>
+  <div>{{ props.id }}</div>
 </template>
 
-<script lang="ts">
-export default {
-
+<script lang="ts" setup>
+interface peopleType {
+  id: String
 }
+const props = defineProps<peopleType>()
 </script>
 
 <style>

@@ -1,11 +1,11 @@
 <template>
   <div>
     <Header />
-    <div>
-      <div class="left">
-        <router-view />
+    <div class="home-container">
+      <div class="home-left Card">
+        <IndexVue />
       </div>
-      <div class="right">
+      <div class="home-right Card">
         <Sider />
       </div>
     </div>
@@ -17,13 +17,25 @@ import { SET_USER } from '@/store/constant'
 import { useStore } from 'vuex'
 import Header from '@/components/common/Header.vue'
 import Sider from '@/components/common/Sider.vue'
+import IndexVue from '@/components/home/Index.vue'
 
 const store = useStore()
-store.dispatch(SET_USER, { name: '123' })
+store.dispatch(SET_USER, { name: '123', avatar: '/static/media/2.png' })
 </script>
 
 <style>
-.left{
-  height: 3000px;
-}
+  .home-container{
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    padding-top: 20px;
+    justify-content: space-between;
+  }
+  .home-left{
+    width: 654px;
+    margin-right: 10px;
+  }
+  .home-right{
+    flex: auto;
+  }
 </style>
