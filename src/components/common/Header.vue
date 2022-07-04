@@ -286,6 +286,7 @@ function handlePublishNewQuestion ():void {
   box-shadow: 0 1px 1px #e1e1e1,0 2px 1px #f5f5f5;
   position: sticky;
   top: 0;
+  z-index: 999;
 }
 .navHeader{
   max-width: 1156px;

@@ -5,20 +5,40 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import ElementPlus from 'unplugin-element-plus/vite'
 import eslintPlugin from 'vite-plugin-eslint'
-import { resolve } from 'path'
+import path, { resolve } from 'path'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+
+const pathSrc = path.resolve(__dirname, 'src')
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      resolvers: [ElementPlusResolver()]
+      imports: ['vue'],
+      resolvers: [
+        ElementPlusResolver(),
+        IconsResolver({
+          prefix: 'Icon'
+        })
+      ],
+      dts: path.resolve(pathSrc, 'auto-imports.d.ts')
     }),
     Components({
-      resolvers: [ElementPlusResolver()]
+      resolvers: [
+        ElementPlusResolver(),
+        IconsResolver({
+          enabledCollections: ['ep']
+        })
+      ],
+      dts: path.resolve(pathSrc, 'components.d.ts')
     }),
     ElementPlus({
       // options
+    }),
+    Icons({
+      autoInstall: true
     }),
     eslintPlugin({
       include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue']

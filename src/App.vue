@@ -17,6 +17,11 @@ body{
   font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
   overflow: auto !important;
   background-color: #f6f6f6;
+  padding-right: 0px !important;
+}
+.modal-open {
+  overflow-y: scroll;
+  padding-right: 0 !important;
 }
 li{
   list-style: none;

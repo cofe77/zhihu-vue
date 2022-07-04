@@ -1,5 +1,9 @@
 <template>
-  <div class="content-comment-section">
+  <Loading v-if="!commentsList" />
+  <div
+    v-if="!!commentsList"
+    class="content-comment-section"
+  >
     <div
       v-if="commentsCount !== 0"
       class="comment-section-title"
