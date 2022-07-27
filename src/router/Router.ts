@@ -59,7 +59,7 @@ const routes = [
     // ]
   },
   {
-    path: '/people/:id',
+    path: '/people/:username',
     component: PeopleVue
   },
   {
@@ -74,6 +74,15 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+router.beforeEach(async (to, from) => {
+  const isAuthenticated = !!JSON.parse(localStorage.getItem('user') as string)?.id
+  if (
+    !isAuthenticated && to.path !== '/login'
+  ) {
+    return '/login'
+  }
 })
 
 export default router

@@ -171,22 +171,14 @@
 import { toRefs, onBeforeMount, ref } from 'vue'
 import { isObjectEmpty } from '@/utils/tools'
 import api from '@/api'
-interface QuestionType {
+import { QuestionTypes } from '@/types/question'
+const props = defineProps<{
   id: string,
-  answers: [{
-    id: string,
-    author: {}
-  }]
-}
-const props = defineProps<QuestionType>()
+  isFold: boolean,
+
+}>()
 const { id } = toRefs(props)
-const question = ref<QuestionType>({
-  id: '',
-  answers: [{
-    id: '',
-    author: {}
-  }]
-})
+const question = ref<QuestionTypes>()
 
 onBeforeMount(() => {
   api.getQuestionById(id.value).then(res => {

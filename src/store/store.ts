@@ -1,25 +1,36 @@
-import { createStore } from 'vuex'
+import { defineStore } from 'pinia'
 import { SET_USER } from './constant'
 
-// 创建一个新的 store 实例
-const store = createStore({
-  state () {
+const userInfoStore = defineStore('user', {
+  state: () => {
     return {
-      user: {
-        avatar: ''
-      }
+      id: '',
+      avatar: '',
+      username: ''
     }
   },
-  mutations: {
-    [SET_USER] (state, userInfo) {
-      state.user = { ...userInfo }
+  getters: {
+    getUserInfo (state):string {
+      return state.id
+    },
+    getUserName (state):string {
+      return state.username
     }
   },
   actions: {
-    [SET_USER] (context, userInfo) {
-      context.commit(SET_USER, userInfo)
+    async [SET_USER] (userInfo: any) {
+      this.id = userInfo.id
     }
+  },
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        storage: localStorage,
+        key: 'user'
+      }
+    ]
   }
 })
 
-export default store
+export default userInfoStore

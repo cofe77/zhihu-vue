@@ -417,6 +417,7 @@ const vipRankData = computed(() => mockData.rank[type.value as vipRankType])
 
 const setType = (targetType: string) => {
   type.value = targetType
+  console.log('targetType', targetType)
 }
 
 </script>

@@ -8,6 +8,9 @@ import eslintPlugin from 'vite-plugin-eslint'
 import path, { resolve } from 'path'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+import Unocss from 'unocss/vite'
+import presetIcons from '@unocss/preset-icons'
+import presetWind from '@unocss/preset-wind'
 
 const pathSrc = path.resolve(__dirname, 'src')
 
@@ -42,6 +45,12 @@ export default defineConfig({
     }),
     eslintPlugin({
       include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue']
+    }),
+    Unocss({
+      presets: [
+        presetIcons({}),
+        presetWind()
+      ]
     })
   ],
   server: {

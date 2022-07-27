@@ -95,6 +95,8 @@
             <el-popover
               placement="bottom"
               trigger="click"
+              width="400px"
+              :offset="18"
             >
               <Notification />
               <template #reference>
@@ -113,6 +115,8 @@
             <el-popover
               placement="bottom"
               trigger="click"
+              width="360px"
+              :offset="18"
             >
               <PrivateMessage />
               <template #reference>
@@ -134,6 +138,9 @@
             <el-popover
               placement="bottom"
               trigger="click"
+              :width="100"
+              popper-class="user-center-more-pop"
+              :offset="18"
             >
               <UserCenterMore />
               <template #reference>
@@ -232,23 +239,29 @@
       </div>
     </div>
   </div>
+  <el-dialog
+    v-model="dialogVisible"
+    title="Tips"
+    width="70%"
+  >
+    <NewQuestionModalVue />
+  </el-dialog>
 </template>
 
 <script lang="ts" setup>
-import { ElMessageBox } from 'element-plus'
-import { computed, h, ref } from 'vue'
-import { useStore } from 'vuex'
+import { ref } from 'vue'
+import userInfoStore from '@/store/store'
 import NewQuestionModalVue from './NewQuestionModal.vue'
 import Notification from './Notification.vue'
 import PrivateMessage from './PrivateMessage.vue'
 import UserCenterMore from './UserCenterMore.vue'
 
-const store = useStore()
+const userInfo = userInfoStore()
 
-const userInfo = computed(() => store.state.user)
 const windowScrollTop = ref(0)
 const lastWindowScrollTop = ref(0)
 const isNavShow = ref(true)
+const dialogVisible = ref(false)
 
 function onChangeHandle (): void {
 }
@@ -264,10 +277,7 @@ function headerScroll (): void {
 }
 
 function handlePublishNewQuestion ():void {
-  ElMessageBox({
-    title: '提问',
-    message: h(NewQuestionModalVue, {})
-  }).then()
+  dialogVisible.value = true
 }
 </script>
 
@@ -426,6 +436,10 @@ function handlePublishNewQuestion ():void {
   display: none;
   opacity: 0;
   transition: 0.4s;
+}
+.el-popover.user-center-more-pop{
+  min-width: 100px;
+  padding: 0;
 }
 .user-center-more-hidden{
   top: 37px;

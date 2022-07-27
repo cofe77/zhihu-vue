@@ -36,6 +36,8 @@
 import api from '@/api'
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import { SET_USER } from '@/store/constant'
+import userInfoStore from '@/store/store'
 
 const router = useRouter()
 
@@ -43,13 +45,15 @@ const router = useRouter()
 const form = reactive({
   username: '',
   pwd: '',
-  remeberMe: [false]
+  remeberMe: ['false']
 })
 
 const onSubmit = () => {
   api.login(form).then(res => {
-    localStorage.setItem('userInfo', JSON.stringify(res.data.data.userInfo))
+    localStorage.clear()
     localStorage.setItem('token', JSON.stringify(res.data.data.token))
+    const userInfo = userInfoStore()
+    userInfo[SET_USER](res.data.data.userInfo)
     router.push({ path: '/', replace: true })
   })
 }

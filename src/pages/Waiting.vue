@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <div id="zhihu-body">
+    <div class="waiting-content">
       <div class="waiting-main bd-l">
         <div class="waiting-mask" />
         <div class="waiting-header">
@@ -28,29 +28,29 @@
         </div>
         <div class="waiting-body">
           <div
-            v-for="question in questions"
-            :key="question?.id"
+            v-for="_question in questions"
+            :key="_question?.id"
             class="question-unit"
           >
             <div class="question-unit-header">
               <img
-                :src="question.author.avatar"
+                :src="_question.author.avatar"
                 alt=""
               >
-              {{ question.author.username }} 的提问
-              <span>{{ moment(question.updateTime).fromNow() }} 期待你的回答</span>
+              {{ _question.author.username }} 的提问
+              <span>{{ proxy.$moment(_question.updateTime).fromNow() }} 期待你的回答</span>
             </div>
             <div class="question-unit-body">
               <div class="unit-body-left">
                 <router-link to="`/question/${question.id}`}">
-                  {{ question.title }}
+                  {{ _question.title }}
                 </router-link>
               </div>
               <div
                 class="btn btn-primary"
-                @click="handleAnswer(question)"
+                @click="handleAnswer(_question)"
               >
-                <StarFilled /> 写回答
+                <StarFilled viewBox="0 100 1024 1024" /> 写回答
               </div>
             </div>
             <div class="question-unit-footer">
@@ -59,16 +59,47 @@
           </div>
         </div>
       </div>
-      <Sider />
+      <Sider class="waiting-sider" />
     </div>
+    <el-dialog
+      v-model="answerDialogVisible"
+      title="写回答"
+      width="60%"
+    >
+      <AnswerModal :question="question" />
+    </el-dialog>
   </div>
 </template>
 
 <script lang="ts" setup>
+import api from '@/api'
+import { QuestionTypes } from '@/types/question'
+import { onBeforeMount, ref, getCurrentInstance, Ref } from 'vue'
+const { proxy } = getCurrentInstance() as any
+
+const questions = ref<QuestionTypes[]>([])
+const answerDialogVisible = ref(false)
+const question = ref<QuestionTypes>() as Ref<QuestionTypes>
+onBeforeMount(() => {
+  api.getQuestionByCategory().then(res => {
+    questions.value = res.data.data
+    console.log(res)
+  }).catch(err => {
+    console.log(err)
+  })
+})
+
+const handleAnswer = (currentQuestion: QuestionTypes) => {
+  question.value = { ...currentQuestion }
+  answerDialogVisible.value = true
+}
 </script>
 
 <style lang="less">
-.waiting-main{
+.waiting-content{
+  display: flex;
+  justify-content: center;
+  .waiting-main{
     width: 650px;
     .waiting-mask{
         width: 650px;
@@ -93,8 +124,12 @@
             padding: 0 10px;
             margin-left: 20px;
             color: #8590a6;
-            p{
-                align-items: center;
+            svg{
+              width: 24px;
+              height: 24px;
+            }
+            span{
+              line-height: 30px;
             }
         }
         .header-router-link:hover{
@@ -126,11 +161,20 @@
                 .unit-body-left{
                     font-size: 15px;
                 }
+                svg{
+                  width: 21px;
+                  height: 21px;
+                  vertical-align: middle;
+                }
             }
             .question-unit-footer{
                 color: gray;
             }
         }
     }
+  }
+  .waiting-sider{
+    margin-top: 10px;
+  }
 }
 </style>
