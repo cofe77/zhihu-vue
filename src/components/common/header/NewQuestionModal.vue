@@ -50,9 +50,9 @@ import '@wangeditor/editor/dist/css/style.css'
 import api from '@/api'
 import { reactive, onBeforeUnmount, ref, shallowRef } from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
-import userInfoStore from '@/store/store'
+import { userInfoStore } from '@/store/store'
 
-const userInfo = userInfoStore()
+const { userInfo } = userInfoStore()
 const publishSuccess = ref(false)
 
 // do not use same name with ref
@@ -90,7 +90,7 @@ const handleCreated = (editor: any) => {
 const onSubmit = () => {
   api.newQuestion({
     authorId: userInfo.id,
-    mainPic: '/api/static/media/1.b4b91e14.jpg',
+    mainPic: '/static/media/1.b4b91e14.jpg',
     content: valueHtml.value,
     title: form.title,
     tag: form.tag

@@ -32,7 +32,6 @@ axios.interceptors.request.use(
     })
     config.headers.token = JSON.parse(localStorage.getItem('token') || '{}')
     config.headers['Content-Type'] = 'application/json; charset=UTF-8'
-    console.log(config)
 
     return Promise.resolve(config)
   },

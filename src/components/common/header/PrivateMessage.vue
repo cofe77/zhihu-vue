@@ -22,7 +22,9 @@
                 创作者小助手
               </div>
               <div class="private-message-authentication">
-                <CheckCircleFilled />
+                <div
+                  class="i-mdi-check-decagram w-6 h-6 mx-auto"
+                />
               </div>
             </div>
             <div class="private-message-text">
@@ -34,7 +36,10 @@
     </div>
     <div class="private-message-footer">
       <div class="private-message-write-new">
-        <EditFilled /><span>写新私信</span>
+        <div
+          class="i-mdi-pencil w-5 h-5 inline-block"
+        />
+        <span>写新私信</span>
       </div>
       <div class="private-message-view-all">
         查看全部私信
@@ -112,6 +117,10 @@
     padding: 10px;
     color: #8590a6;
     border-top: 1px solid #ebebeb;
+    .private-message-write-new{
+      display: flex;
+      align-items: center;
+    }
   }
 }
 </style>

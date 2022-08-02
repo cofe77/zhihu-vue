@@ -4,6 +4,12 @@ import VideoVue from '@/components/home/Video.vue'
 import FollowVue from '@/components/home/Follow.vue'
 import LoginVue from '@/components/login/Login.vue'
 import PeopleVue from '@/components/people/People.vue'
+import PeopleIndexVue from '@/components/people/PeopleIndex.vue'
+import PeopleDynamicVue from '@/components/people/PeopleDynamic.vue'
+import PeopleAnswersVue from '@/components/people/PeopleAnswers.vue'
+import PeopleAsksVue from '@/components/people/PeopleAsks.vue'
+import PeopleCollectionsVue from '@/components/people/PeopleCollections.vue'
+import PeopleFollowingVue from '@/components/people/PeopleFollowing.vue'
 import SettingVue from '@/components/people/Setting.vue'
 import EditVue from '@/components/people/Edit.vue'
 import QuestionVue from '@/components/question/Question.vue'
@@ -59,16 +65,24 @@ const routes = [
     // ]
   },
   {
-    path: '/people/:username',
-    component: PeopleVue
-  },
-  {
-    path: '/people/edit',
-    component: EditVue
-  },
-  {
-    path: '/people/setting',
-    component: SettingVue
+    path: '/people',
+    component: PeopleIndexVue,
+    children: [
+      { path: '/people/edit', component: EditVue },
+      { path: '/people/settings', component: SettingVue },
+      {
+        path: '/people/:username',
+        component: PeopleVue,
+        props: true,
+        children: [
+          { path: '/people/:username/answers', component: PeopleAnswersVue },
+          { path: '/people/:username/asks', component: PeopleAsksVue },
+          { path: '/people/:username/collections', component: PeopleCollectionsVue },
+          { path: '/people/:username/following', component: PeopleFollowingVue },
+          { path: '/people/:username/', component: PeopleDynamicVue }
+        ]
+      }
+    ]
   }
 ]
 const router = createRouter({
@@ -77,7 +91,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from) => {
-  const isAuthenticated = !!JSON.parse(localStorage.getItem('user') as string)?.id
+  const isAuthenticated = !!JSON.parse(localStorage.getItem('user') as string)?.userInfo.id
   if (
     !isAuthenticated && to.path !== '/login'
   ) {

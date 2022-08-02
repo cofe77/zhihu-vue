@@ -52,14 +52,14 @@ import { ref, reactive, shallowRef, onBeforeUnmount, toRefs } from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import '@wangeditor/editor/dist/css/style.css'
 import api from '@/api'
-import userInfoStore from '@/store/store'
-import { QuestionTypes } from '@/types/question'
+import { userInfoStore } from '@/store/store'
+import QuestionTypes from '@/types/question'
 
 const props = defineProps<{question:QuestionTypes}>()
 const { question } = toRefs(props)
 console.log('question', question)
 
-const userInfo = userInfoStore()
+const { userInfo } = userInfoStore()
 const answerSuccess = ref(false)
 const form = reactive({
   content: ''

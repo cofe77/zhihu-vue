@@ -9,8 +9,8 @@
           class="i-mdi-format-list-bulleted w-6 h-6 mx-auto"
         />
       </div>
-      <Divider
-        type="vertical"
+      <el-divider
+        direction="vertical"
         class="notificationHeader-divider"
       />
       <div
@@ -21,8 +21,8 @@
           class="i-mdi-account-multiple w-6 h-6 mx-auto"
         />
       </div>
-      <Divider
-        type="vertical"
+      <el-divider
+        direction="vertical"
         class="notificationHeader-divider"
       />
       <div
@@ -68,7 +68,7 @@
           >
             <div class="follow-item-ava">
               <img
-                src="/static/media/2.png"
+                src="/media/2.png"
                 alt=""
               >
             </div>

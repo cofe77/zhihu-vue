@@ -1,64 +1,61 @@
 <template>
-  <div>
-    <Header />
-    <div class="people">
-      <div v-if="isLoaded">
-        <div class="people-header">
-          <div class="people-header-top">
-            <div class="btn btn-white header-top-btn">
-              上传封面图
+  <div class="people">
+    <div v-if="isLoaded">
+      <div class="people-header">
+        <div class="people-header-top">
+          <div class="btn btn-white header-top-btn">
+            上传封面图
+          </div>
+        </div>
+        <div class="people-header-main">
+          <div class="header-main-ava">
+            <div class="header-main-ava-container">
+              <img
+                :src="userInfo!.avatar"
+                alt=""
+              >
             </div>
           </div>
-          <div class="people-header-main">
-            <div class="header-main-ava">
-              <div class="header-main-ava-container">
-                <img
-                  :src="userInfo!.avatar"
-                  alt=""
-                >
+          <div class="header-main-info">
+            <div class="main-info-header">
+              <span class="info-header-username">{{ username }}</span>
+              <span class="info-header-slogan">{{ userInfo!.slogan }}</span>
+            </div>
+            <div class="main-info-body">
+              <div class="info-body-not-collapse">
+                <div class="body-not-collapse-item">
+                  <ContactsFilled />
+                  <span class="not-collapse-item-content">{{ userInfo!.profession }}</span>
+                </div>
+                <div class="body-not-collapse-item">
+                  <ContactsFilled />
+                  <span class="not-collapse-item-content">{{ userInfo!.educations?.length > 0 ? userInfo?.educations[0]!.school : "" }}</span>
+                </div>
               </div>
             </div>
-            <div class="header-main-info">
-              <div class="main-info-header">
-                <span class="info-header-username">{{ username }}</span>
-                <span class="info-header-slogan">{{ userInfo!.slogan }}</span>
+            <div class="main-info-footer">
+              <div class="info-footer-left">
+                <DownOutlined />{{ ` 查看详细资料` }}
               </div>
-              <div class="main-info-body">
-                <div class="info-body-not-collapse">
-                  <div class="body-not-collapse-item">
-                    <ContactsFilled />
-                    <span class="not-collapse-item-content">{{ userInfo!.profession }}</span>
-                  </div>
-                  <div class="body-not-collapse-item">
-                    <ContactsFilled />
-                    <span class="not-collapse-item-content">{{ userInfo!.educations?.length > 0 ? userInfo?.educations[0]!.school : "" }}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="main-info-footer">
-                <div class="info-footer-left">
-                  <DownOutlined />{{ ` 查看详细资料` }}
-                </div>
-                <div class="info-footer-right">
-                  <div
-                    class="btn btn-blue"
-                    @click="editMyInfo"
-                  >
-                    编辑个人资料
-                  </div>
+              <div class="info-footer-right">
+                <div
+                  class="btn btn-blue"
+                  @click="editMyInfo"
+                >
+                  编辑个人资料
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="people-body">
-          <div class="people-left">
-            <PeopleMenu />
-            <Outlet />
-          </div>
-          <div class="people-right">
-            <Side />
-          </div>
+      </div>
+      <div class="people-body">
+        <div class="people-left">
+          <PeopleMenu :username="(username as string)" />
+          <router-view />
+        </div>
+        <div class="people-right">
+          <Side />
         </div>
       </div>
     </div>
@@ -78,7 +75,6 @@ const route = useRoute()
 const { username } = route.params
 const router = useRouter()
 onBeforeMount(() => {
-  console.log(11)
   api.getUserInfoByName(username as string).then((res: any) => {
     userInfo.value = res.data.data
     isLoaded.value = true

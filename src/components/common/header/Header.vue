@@ -250,13 +250,13 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import userInfoStore from '@/store/store'
+import { userInfoStore } from '@/store/store'
 import NewQuestionModalVue from './NewQuestionModal.vue'
 import Notification from './Notification.vue'
 import PrivateMessage from './PrivateMessage.vue'
 import UserCenterMore from './UserCenterMore.vue'
 
-const userInfo = userInfoStore()
+const { userInfo } = userInfoStore()
 
 const windowScrollTop = ref(0)
 const lastWindowScrollTop = ref(0)

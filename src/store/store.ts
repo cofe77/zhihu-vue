@@ -1,25 +1,28 @@
+import UserTypes from '@/types/user'
 import { defineStore } from 'pinia'
 import { SET_USER } from './constant'
 
 const userInfoStore = defineStore('user', {
-  state: () => {
+  state: ():{userInfo: UserTypes} => {
     return {
-      id: '',
-      avatar: '',
-      username: ''
+      userInfo: {} as UserTypes
     }
   },
   getters: {
-    getUserInfo (state):string {
-      return state.id
+    getUserInfo (state):UserTypes {
+      return state.userInfo
     },
     getUserName (state):string {
-      return state.username
+      return state.userInfo.username
+    },
+    getUserId (state):string {
+      return state.userInfo.id
     }
   },
   actions: {
-    async [SET_USER] (userInfo: any) {
-      this.id = userInfo.id
+    async [SET_USER] (userInfo: UserTypes) {
+      console.log(userInfo)
+      this.userInfo = { ...userInfo }
     }
   },
   persist: {
@@ -33,4 +36,31 @@ const userInfoStore = defineStore('user', {
   }
 })
 
-export default userInfoStore
+const peopleMenuStore = defineStore('peopleMenu', {
+  state: () => {
+    return {
+      currentMenu: 'index'
+    }
+  },
+  getters: {
+    getCurrentMenu (state):string {
+      return state.currentMenu
+    }
+  },
+  actions: {
+    async setCurrentMenu (target:string) {
+      this.currentMenu = target
+    }
+  },
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        storage: localStorage,
+        key: 'peopleMenu'
+      }
+    ]
+  }
+})
+
+export { userInfoStore, peopleMenuStore }

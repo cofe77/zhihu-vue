@@ -1,7 +1,7 @@
 import AnswerTypes from '../answer'
 import UserTypes from '../user'
 
-interface QuestionTypes {
+export default interface QuestionTypes {
   id: string = '',
   title: string = '',
   author: UserTypes,
@@ -11,5 +11,3 @@ interface QuestionTypes {
   content: string = '',
   updateTime: string = ''
 }
-
-export { QuestionTypes }

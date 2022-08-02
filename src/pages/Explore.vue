@@ -82,8 +82,8 @@
       >
         <div class="explore-latest-post">
           <div
-            v-for="item,index in exploreData.post"
-            :key="index"
+            v-for="item,index1 in exploreData.post"
+            :key="index1"
             class="post-item explore-card"
           >
             <div class="post-item-img">
@@ -109,8 +109,8 @@
             </div>
             <div class="post-item-body">
               <div
-                v-for="post,index in item.posts"
-                :key="index"
+                v-for="post,index2 in item.posts"
+                :key="index2"
                 class="post-body-part"
               >
                 <span class="post-part-keyword">{{ post.keyword }}</span>

@@ -37,7 +37,7 @@ import api from '@/api'
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { SET_USER } from '@/store/constant'
-import userInfoStore from '@/store/store'
+import { userInfoStore } from '@/store/store'
 
 const router = useRouter()
 
@@ -52,8 +52,9 @@ const onSubmit = () => {
   api.login(form).then(res => {
     localStorage.clear()
     localStorage.setItem('token', JSON.stringify(res.data.data.token))
-    const userInfo = userInfoStore()
-    userInfo[SET_USER](res.data.data.userInfo)
+    const store = userInfoStore()
+    console.log(store.getUserInfo)
+    store[SET_USER](res.data.data.userInfo)
     router.push({ path: '/', replace: true })
   })
 }

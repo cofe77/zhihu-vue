@@ -2,19 +2,19 @@
   <div class="user-center-section">
     <router-link
       class="user-center-li"
-      :to="`/people/${username}`"
+      :to="'/people/'+username"
     >
       我的主页
     </router-link>
     <router-link
       class="user-center-li"
-      to="/creator"
+      to="/people/creator"
     >
       创作中心
     </router-link>
     <router-link
       class="user-center-li"
-      to="/settings"
+      to="/people/settings"
     >
       设置
     </router-link>
@@ -28,17 +28,15 @@
 </template>
 
 <script lang="ts" setup>
-import userInfoStore from '@/store/store'
-import { computed } from 'vue'
+import { userInfoStore } from '@/store/store'
 import { useRouter } from 'vue-router'
 
-const userInfo = userInfoStore()
-console.log('userInfo id', userInfo.id)
+const store = userInfoStore()
 
 const router = useRouter()
-const username = computed(() => userInfo.username)
+const username = store.getUserName || ''
+
 const handleLogout = () => {
-  localStorage.removeItem('user')
   localStorage.removeItem('token')
   router.push({ path: '/login', replace: true })
 }
