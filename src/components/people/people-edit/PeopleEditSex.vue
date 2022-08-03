@@ -18,13 +18,13 @@
             class="ml-4"
           >
             <el-radio
-              label="1"
+              label="男"
               size="large"
             >
               男
             </el-radio>
             <el-radio
-              label="2"
+              label="女"
               size="large"
             >
               女
@@ -40,7 +40,7 @@
           </div>
           <div
             class="btn btn-grey"
-            @click="isSexEditShow = false"
+            @click="handleCancelEditSex"
           >
             取消
           </div>
@@ -51,11 +51,34 @@
 </template>
 
 <script lang="ts" setup>
+import api from '@/api/index.js'
+import { userInfoStore } from '@/store/store.js'
+import { ElMessage } from 'element-plus'
 import { ref } from 'vue'
+const store = userInfoStore()
+const id = store.getUserId
+const sex = ref(store.getSex)
 const isSexEditShow = ref(false)
-const sexNew = ref('')
+const sexNew = ref(sex)
+const handleCancelEditSex = () => {
+  sexNew.value = sex.value
+  isSexEditShow.value = false
+}
 const handleSaveSex = () => {
-
+  api.updateUserSex({
+    id,
+    sex: sexNew.value
+  }).then((res: any) => {
+    if (res.data.status === 20031) {
+      store.updateUserInfo()
+      console.log('sex', sex)
+      console.log('sexNew', sexNew.value)
+      isSexEditShow.value = false
+      ElMessage.success(res.data.msg)
+    }
+  }).catch((err: any) => {
+    ElMessage.error(err.data.error)
+  })
 }
 </script>
 

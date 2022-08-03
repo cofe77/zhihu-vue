@@ -120,8 +120,11 @@
 </template>
 
 <script lang="ts" setup>
+import { userInfoStore } from '@/store/store.js'
 import EducationTypes from '@/types/education/index.js'
-import { ref, toRefs } from 'vue'
+import { ref } from 'vue'
+
+const emit = defineEmits(['should-update'])
 
 const dgreesData: { [key: number]: string } = {
   1: '高中及以下',
@@ -131,10 +134,7 @@ const dgreesData: { [key: number]: string } = {
   5: '博士及以上'
 }
 
-const props = defineProps<{
-  educations: EducationTypes[]
-}>()
-const { educations } = toRefs(props)
+const educations:EducationTypes[] = userInfoStore().getEducations
 
 const isEducationEditShow = ref(false)
 const handleSchoolInput = () => {
@@ -153,7 +153,7 @@ const handleGraduChange = () => {
 
 }
 const handleSaveEducation = () => {
-
+  emit('should-update')
 }
 </script>
 

@@ -79,13 +79,11 @@
 </template>
 
 <script lang="ts" setup>
+import { userInfoStore } from '@/store/store.js'
 import OccupationsTypes from '@/types/occupations/index.js'
-import { ref, toRefs } from 'vue'
+import { ref } from 'vue'
 
-const props = defineProps<{
-  occupations: OccupationsTypes[]
-}>()
-const { occupations } = toRefs(props)
+const occupations = userInfoStore().getOccupations
 const isOccupationEditShow = ref(false)
 const occupationNew = ref<OccupationsTypes>()
 const handleInputOrganization = () => {

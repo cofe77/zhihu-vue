@@ -10,7 +10,10 @@
           <span
             class="people-edit-edit-nick"
             @click="isNickEditShow = true"
-          ><EditFilled />修改</span>
+          >
+            <div class="i-mdi-pencil w-5 h-5 inline-block" />
+            修改
+          </span>
         </div>
         <div
           v-else
@@ -21,9 +24,9 @@
           </div>
           <div class="info-header-item-body">
             <div class="info-header-input">
-              <Input
-                :value="nickNew"
-                @change="handleInputNick"
+              <el-input
+                v-model="nickNew"
+                size="large"
               />
             </div>
             <div class="info-header-btn">
@@ -35,7 +38,7 @@
               </div>
               <div
                 class="btn btn-grey"
-                @click="isNickEditShow = false"
+                @click="handleCancelEditNick"
               >
                 取消
               </div>
@@ -54,16 +57,34 @@
 </template>
 
 <script lang="ts" setup>
+import api from '@/api/index.js'
+import { userInfoStore } from '@/store/store.js'
+import { ElMessage } from 'element-plus'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
+const userStore = userInfoStore()
+const id = userStore.getUserId
+const nick = ref(userStore.getNick)
 const isNickEditShow = ref(false)
-const nickNew = ref('')
-const handleInputNick = () => {
-
+const nickNew = ref(nick)
+const handleCancelEditNick = () => {
+  nickNew.value = nick.value
+  isNickEditShow.value = false
 }
 const handleSaveNick = () => {
-
+  api.updateNick({
+    id,
+    nick: nickNew.value
+  }).then((res: any) => {
+    if (res.data.status === 20031) {
+      userStore.updateUserInfo()
+      ElMessage.success(res.data.msg)
+      isNickEditShow.value = false
+    }
+  }).catch((err: any) => {
+    ElMessage.error(err)
+  })
 }
 </script>
 

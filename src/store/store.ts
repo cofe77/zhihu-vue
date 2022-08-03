@@ -1,3 +1,6 @@
+import api from '@/api'
+import EducationTypes from '@/types/education'
+import OccupationsTypes from '@/types/occupations'
 import UserTypes from '@/types/user'
 import { defineStore } from 'pinia'
 import { SET_USER } from './constant'
@@ -17,12 +20,28 @@ const userInfoStore = defineStore('user', {
     },
     getUserId (state):string {
       return state.userInfo.id
+    },
+    getNick (state):string {
+      return state.userInfo.nick
+    },
+    getSex (state):string {
+      return state.userInfo.sex
+    },
+    getOccupations (state):OccupationsTypes[] {
+      return state.userInfo.occupations
+    },
+    getEducations (state):EducationTypes[] {
+      return state.userInfo.educations
     }
   },
   actions: {
     async [SET_USER] (userInfo: UserTypes) {
-      console.log(userInfo)
       this.userInfo = { ...userInfo }
+    },
+    async updateUserInfo () {
+      api.getUserInfoById(this.userInfo.id).then(res => {
+        this.userInfo = { ...res.data.data }
+      })
     }
   },
   persist: {

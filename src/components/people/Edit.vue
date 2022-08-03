@@ -16,38 +16,14 @@
           </div>
         </div>
         <div class="edit-body-info">
-          <PeopleEditHeader
-            :id="id"
-            :nick="userInfo?.nick"
-            :username="userInfo?.username"
-          />
+          <PeopleEditHeader />
           <div class="edit-info-body">
-            <PeopleEditSex
-              :id="id"
-              :sex="userInfo?.sex"
-            />
-            <PeopleEditSlogan
-              :id="id"
-              :slogan="userInfo?.slogan"
-            />
-            <PeopleEditAddress
-              :id="id"
-              :address="userInfo?.address"
-            />
-            <PeopleEditProfession
-              :id="id"
-              :profession="userInfo?.profession"
-            />
-            <PeopleEditOccupation
-              :id="id"
-              :occupations="userInfo?.occupations"
-              :should-update="shouldUpdate"
-            />
-            <PeopleEditEdu
-              :id="id"
-              :educations="userInfo?.educations"
-              :should-update="shouldUpdate"
-            />
+            <PeopleEditSex />
+            <PeopleEditSlogan />
+            <PeopleEditAddress />
+            <PeopleEditProfession />
+            <PeopleEditOccupation @should-update="shouldUpdate" />
+            <PeopleEditEdu @should-update="shouldUpdate" />
             <div class="edit-info-item">
               <div class="info-item-title">
                 个人认证
@@ -61,10 +37,7 @@
                 </router-link>
               </div>
             </div>
-            <PeopleEditDesc
-              :id="id"
-              :user-desc="userInfo?.userDesc"
-            />
+            <PeopleEditDesc />
           </div>
         </div>
       </div>
@@ -73,14 +46,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
 import { userInfoStore } from '@/store/store.js'
 
 const store = userInfoStore()
 const { userInfo } = store
-const id = store.getUserId
 
-const shouldUpdate = ref(false)
+const shouldUpdate = () => {
+
+}
 
 </script>
 
